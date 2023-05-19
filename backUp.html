@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+    <script src="jquery.js"></script>
+    <script src="lightSlider.js"></script>
+    <script src="venda.js"></script>
+    <style>
+        
+       @import url('https://fonts.cdnfonts.com/css/zag');
+        
+        * {
+            font-family: 'Zag', sans-serif;
+        }
+        .btn{
+            width: 75%;
+            height: 31px;
+            background: #ffffff;
+            box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+            border-radius: 5px;
+            display:block;
+            margin:0 auto;
+            border: 1px solid #ffffff;
+            cursor:pointer;
+        }
+
+        .concluir{
+            background: green !important;
+            border: 1px solid green !important;
+            font-weight: bold;
+            color: white;
+            width: 95%;
+            letter-spacing: 3px;
+        }
+
+        .mais-tarde{
+            background: #990000 !important;
+            border: 1px solid #990000 !important;
+            font-weight: bold;
+            color: white;
+            width: 8%;
+            height:3vh;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .quero-este{
+            font-weight: bold;
+            width: 100%;
+            letter-spacing: 3px;
+        }
+
+
+        *:focus {
+            outline:none;
+        }
+        input:focus {
+            outline: none;
+        }
+        input{
+            width: 70%;
+            height: 31px;
+            border-radius: 5px;
+            display:block;
+            margin:0 auto 1vh auto;
+            border:1px solid #aaa;
+            padding:0 2.5%;
+            font-weight: bold;
+        }
+        
+        .card-modal{
+            position:fixed;
+            top:0;
+            width:100%;
+            height:fit-content;
+            z-index: 10102;
+        }
+        .card-collapse{
+            box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+            padding:2vh 0;
+        }
+        .relativa{
+            position: relative;
+            z-index: 10102;
+            overflow:auto;
+            height:fit-content;
+            background-color: #ffffff;
+            display:block;
+            margin:10vh auto 0 auto;
+            width: 300px;
+            border-radius: 5px;
+        }
+        .relativa img{
+            width: 100%;
+            border-radius: 5px 5px 0 0;
+        }
+        .padding{padding: 2vh;}
+        .backdrop{
+            width:100%;
+            height:100%;
+            position:fixed;
+            width:100%;
+            left: 0;
+            top:0;
+            height:100vh;
+            background: #00000074;
+        }
+
+        .detalhes{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1vh;
+            text-transform: capitalize;
+            padding:2vh;
+            box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+            border-radius: 2px;
+
+        }
+        .detalhes p{font-size: 16px;margin: 5px;}
+
+
+
+        /*-----------------*/
+        .banner{width: 100%;display: block;}
+        .card-detalhes-acao{width:90%;padding:5%;}
+    </style>
+</head>
+<body>
+    <div class="debliw-card-montra-blogger"></div>
+
+    <div class="card-detalhes-acao">
+        <form id="">
+
+            <img src="https://lh3.googleusercontent.com/-ENzChageFmg/YQClSZ-Og-I/AAAAAAAABr0/rGuDE7ON-3cjupm1KMBBgkaBoLCqvoeDACLcBGAsYHQ/s1600/IMG_20210718_011501.jpg" alt="" class="banner">
+            <div>
+                <div class="detalhes">
+                    <P>Produto: Nome do produto</P>
+                    <P>Preço: 5623478 </P>
+                </div>
+                <button type="button" class="card-abre-collapse btn quero-este">QUERO ESTE</button>
+            </div>
+            <div class="card-collapse" style="display:none">
+                <input type="text" required class="inputs">
+                <input type="number" required class="inputs">
+                <input type="email" required class="inputs">
+                <button type="button" class="card-abre-modal btn">FAZER ENCOMENDA</button>
+            </div>
+            <div class="card-modal" style="display:none">
+                <div class="backdrop"></div>
+                <div class="relativa">
+                    <img src="https://lh3.googleusercontent.com/-ENzChageFmg/YQClSZ-Og-I/AAAAAAAABr0/rGuDE7ON-3cjupm1KMBBgkaBoLCqvoeDACLcBGAsYHQ/s1600/IMG_20210718_011501.jpg" alt="" srcset="">
+                    <div class="padding">
+                        <div class="detalhes">
+                            <P>Produto: Nome do produto</P>
+                            <P>Preço: 5623478 </P>
+                            <P>Tipo de compra: ENCOMENDA PRÉ-PAGO</P>
+                        </div>
+                        <button type="submit" class="btn concluir">CONCLUIR PEDIDO</button>
+                    </div>
+                    <button type="button" class="btn mais-tarde"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+</body>
+<script>
+
+    var item = {
+        "id": 1,
+        "nome": "Nome do produto",
+        "preco": 5623478,
+        "tipo": "ENCOMENDA PRÉ-PAGO",
+        "imagem":"https://lh3.googleusercontent.com/-ENzChageFmg/YQClSZ-Og-I/AAAAAAAABr0/rGuDE7ON-3cjupm1KMBBgkaBoLCqvoeDACLcBGAsYHQ/s1600/IMG_20210718_011501.jpg",
+            
+    };
+
+    function iterate(dados=[]){
+        var array = [];
+        dados.forEach(element => {
+            
+        let item =`<div class="card-detalhes-acao">
+        <form id="formulario${element.id}">
+
+            <img src="${element.imagem}" alt="" class="banner">
+            <div>
+                <div class="detalhes">
+                    <P>Produto: ${element.nome}</P>
+                    <P>Preço: ${element.preco} </P>
+                </div>
+                <button type="button" class="card-abre-collapse btn quero-este"  id="quero${element.id}">QUERO ESTE</button>
+            </div>
+            <div class="card-collapse" style="display:none"  id="collapse${element.id}">
+                <input type="text" required class="inputs" id="nome${element.id}">
+                <input type="number" required class="inputs" id="numero${element.id}">
+                <input type="email" required class="inputs" id="email${element.id}">
+                <button type="button" class="card-abre-modal btn"  id="fazerencomenda${element.id}">FAZER ENCOMENDA</button>
+            </div>
+            <div class="card-modal" style="display:none"  id="modal${element.id}">
+                <div class="backdrop"></div>
+                <div class="relativa">
+                    <img src="${element.imagem}" alt="" srcset="">
+                    <div class="padding">
+                        <div class="detalhes">
+                            <P>Produto: ${element.nome}</P>
+                            <P>Preço: ${element.preco} </P>
+                            <P>Tipo de compra: ${element.tipo}</P>
+                        </div>
+                        <button type="submit" class="btn concluir"  id="concluir${element.id}">CONCLUIR PEDIDO</button>
+                    </div>
+                    <button type="button" class="btn mais-tarde" id="tarde${element.id}"></button>
+                </div>
+            </div>
+        </form>
+    </div>`;
+
+
+    array.push(item);
+
+
+});
+
+        return array;
+    }
+
+let itens = iterate([item,item]);
+
+    var sli = new debliwcardmontrablogger($, itens);
+        setTimeout(function() {
+            var root = document.querySelector(".debliw-card-montra-blogger");
+            root.append(sli);
+        }, 1000);
+</script>
+</html>
