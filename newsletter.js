@@ -65,7 +65,6 @@ function debliwaoNewsLetterPlugin(root) {
                     }
                 }
             };
-            var dados= email;
             xhttp.open("GET", "https://127.0.0.1/aleborge-api/newsletter/add.php?email=" + email, true);
             xhttp.send();
 
