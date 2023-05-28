@@ -44,7 +44,6 @@
                     <div>
                         <div class="detalhes" style="text-align:center;">
                             <P>${element.sobre}</P>
-                            <P>${element.sobre}</P>
                         </div>
                         
                     </div>
