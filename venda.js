@@ -534,7 +534,7 @@ debliw_card_montra_blogger.innerHTML = `
 
 
         /*-----------------*/
-        .banner{width: 100%;display: block;}
+        .banner{width: 100%;display: block;box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);}
 
  @import url('https://fonts.cdnfonts.com/css/zag');
         
