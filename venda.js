@@ -418,7 +418,123 @@ debliw_card_montra_blogger.innerHTML = `
 }
 .container img{
 }
+@import url('https://fonts.cdnfonts.com/css/zag');
+        
+        #compra-aleborge {
+            font-family: 'Zag', sans-serif;
+        }
+        .btn{
+            width: 75%;
+            height: 31px;
+            background: #ffffff;
+            box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+            border-radius: 5px;
+            display:block;
+            margin:0 auto;
+            border: 1px solid #ffffff;
+            cursor:pointer;
+        }
 
+        .concluir{
+            background: green !important;
+            border: 1px solid green !important;
+            font-weight: bold;
+            color: white;
+            width: 100%;
+            letter-spacing: 3px;
+        }
+
+        .mais-tarde{
+            background: #990000 !important;
+            border: 1px solid #990000 !important;
+            font-weight: bold;
+            color: white;
+            width: 8%;
+            height:3vh;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .quero-este{
+            font-weight: bold;
+            width: 100%;
+            letter-spacing: 3px;
+        }
+
+
+        *:focus {
+            outline:none;
+        }
+        input:focus {
+            outline: none;
+        }
+        input{
+            width: 70%;
+            height: 31px;
+            border-radius: 5px;
+            display:block;
+            margin:0 auto 1vh auto;
+            border:1px solid #aaa;
+            padding:0 2.5%;
+            font-weight: bold;
+        }
+        
+        .card-modal{
+            position:fixed;
+            top:0;
+            width:100%;
+            height:fit-content;
+            z-index: 10102;
+        }
+        .card-collapse{
+            box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+            padding:2vh 0;
+        }
+        .relativa{
+            position: relative;
+            z-index: 10102;
+            overflow:auto;
+            height:fit-content;
+            background-color: #ffffff;
+            display:block;
+            margin:10vh auto 0 auto;
+            width: 300px;
+            border-radius: 5px;
+        }
+        .relativa img{
+            width: 100%;
+            border-radius: 5px 5px 0 0;
+        }
+        .padding{padding: 2vh;}
+        .backdrop{
+            width:100%;
+            height:100%;
+            position:fixed;
+            width:100%;
+            left: 0;
+            top:0;
+            height:100vh;
+            background: #00000074;
+        }
+
+        .detalhes{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1vh;
+            text-transform: capitalize;
+            padding:2vh;
+            box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
+            border-radius: 2px;
+
+        }
+        .detalhes p{font-size: 16px;margin: 5px;}
+
+
+
+        /*-----------------*/
+        .banner{width: 100%;display: block;}
 
  @import url('https://fonts.cdnfonts.com/css/zag');
         
@@ -442,7 +558,7 @@ debliw_card_montra_blogger.innerHTML = `
             border: 1px solid green !important;
             font-weight: bold;
             color: white;
-            width: 95%;
+            width: 100%;
             letter-spacing: 3px;
         }
 
@@ -487,6 +603,7 @@ debliw_card_montra_blogger.innerHTML = `
             top:0;
             left:0;
             z-index: 222102;
+            overflow-y: scroll;
         }
         .card-collapse{
             box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.25);
@@ -499,8 +616,8 @@ debliw_card_montra_blogger.innerHTML = `
             height:fit-content;
             background-color: #ffffff;
             display:block;
-            margin:10vh auto 0 auto;
-            width: 80%;
+            margin:2vh auto 0 auto;
+            width: 85%;
             border-radius: 5px;
         }
         .relativa img{
@@ -529,7 +646,7 @@ debliw_card_montra_blogger.innerHTML = `
             border-radius: 2px;
 
         }
-        .detalhes p{font-size: 16px;margin: 5px;}
+        .detalhes p{font-size: 16px;margin: 0;}
         .banner{width: 100%;display: block;}
         .card-detalhes-acao{width:90%;padding:5%;position: relative;letter-spacing:1px}
 @media screen and (max-width:1000px) {
@@ -538,7 +655,7 @@ debliw_card_montra_blogger.innerHTML = `
 }
 </style>
 
-    <ul class="container">
+    <ul class="container" id="compra-aleborge">
        
     </ul>
 `;
@@ -583,7 +700,7 @@ class debliwcardmontrablogger extends HTMLElement {
         });
 
         setTimeout(function() {
-            for (let index = 0;index < numeroItens; index++) {
+            for (let index = 1;index < numeroItens; index++) {
                 console.log(index);
                 esse.shadowRoot.querySelector("#quero"+(index)).addEventListener('click', function(){
                     console.log(index);
@@ -614,6 +731,21 @@ class debliwcardmontrablogger extends HTMLElement {
                 esse.shadowRoot.querySelector("#tarde"+(index)).addEventListener('click', function(){
                     let modal = esse.shadowRoot.querySelector("#modal"+(index));
                     modal.style.display = "none";
+                   
+                });
+                esse.shadowRoot.querySelector("#formulario"+(index)).addEventListener('submit', function(ev){
+                    ev.preventDefault();
+                    esse.shadowRoot.querySelector("#concluir"+(index)).setAttribute("disabled","disabled");
+                    let nome = esse.shadowRoot.querySelector("#nome"+(index)).value;
+                    let telefone = esse.shadowRoot.querySelector("#telefone"+(index)).value;
+                    let email = esse.shadowRoot.querySelector("#email"+(index)).value;
+                    let produto = esse.shadowRoot.querySelector("#produto"+(index)).value;
+
+                    let array ={"nome":nome,"telefone":telefone,"email":email,"produto":produto};
+                    
+                    esse.jquery.post("https://127.0.0.1/aleborge-api/pedido/add.php",{dados: JSON.stringify(array)}).done(function(dados){
+                        location.reload();
+                    })
                    
                 });
                 
