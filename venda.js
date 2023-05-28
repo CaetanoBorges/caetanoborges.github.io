@@ -743,7 +743,7 @@ class debliwcardmontrablogger extends HTMLElement {
 
                     let array ={"nome":nome,"telefone":telefone,"email":email,"produto":produto};
                     
-                    esse.jquery.post("https://127.0.0.1/aleborge-api/pedido/add.php",{dados: JSON.stringify(array)}).done(function(dados){
+                    esse.jquery.post("https://academiadeautoresdahuila.net/_api_w_/aleborge/pedido/add.php",{dados: JSON.stringify(array)}).done(function(dados){
                         location.reload();
                     })
                    
