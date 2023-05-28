@@ -65,7 +65,7 @@ function debliwaoNewsLetterPlugin(root) {
                     }
                 }
             };
-            xhttp.open("GET", "http://academiadeautoresdahuila.net/_api_w_/aleborge/newsletter/add.php?email=" + email, true);
+            xhttp.open("GET", "https://academiadeautoresdahuila.net/_api_w_/aleborge/newsletter/add.php?email=" + email, true);
             xhttp.send();
 
         } else {
