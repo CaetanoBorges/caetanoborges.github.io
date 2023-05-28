@@ -66,7 +66,7 @@ function debliwaoNewsLetterPlugin(root) {
                 }
             };
             var dados = {email: email};
-            xhttp.open("GET", "https://127.0.0.1/aleborge-api/newsletter/add.php?dados=" + JSON.stringify(email), true);
+            xhttp.open("GET", "https://127.0.0.1/aleborge-api/newsletter/add.php?dados=" + JSON.stringify(dados), true);
             xhttp.send();
 
         } else {
