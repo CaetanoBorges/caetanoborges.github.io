@@ -21,8 +21,8 @@
     <div class="debliwao-newsletter">
 
     </div>
-<
-<script src="debliw.ao-newsletter-plugin.js"></script>
+
+<script src="newsletter.js"></script>
 <script>
     debliwaoNewsLetterPlugin(".debliwao-newsletter");
 </script>
@@ -30,7 +30,7 @@
 
 </body>
 <script>
-$.get("http://127.0.0.1/aleborge-api/produto/getAll.php").done(function(dados){
+$.get("http://cdn.binga.ao/aleborge/produto/getAll.php").done(function(dados){
     var objecto = JSON.parse(dados);
     var item = iterate(objecto.payload);
 
